@@ -1,0 +1,1 @@
+Descargar manejador de paquetes "composer" en su versión más actual, para poder ocupar la extensión de convertir a excel.

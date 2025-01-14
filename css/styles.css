@@ -1,0 +1,222 @@
+body {
+  background-color: #f9f9f9;
+}
+
+.imagen-enfermero {
+  width: 50px;
+  height: 50px;
+  border: 2px solid #cccccc;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Agrega estilos para la tabla */
+.table {
+  border: 1px solid #dddddd90;
+  border-collapse: collapse;
+  width: 100%;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1), 8px 0 8px rgba(0, 0, 0, 0.1);
+  /* Cambia los valores según tu preferencia */
+}
+
+.titulo-tabla {
+  background-color: #5499c7;
+  color: white;
+  /* Para cambiar el color del texto en el encabezado */
+}
+
+/* Estilo para filas al pasar el mouse */
+.table tbody tr:hover {
+  background-color: #c2d5da;
+}
+
+/* Estilo para celdas */
+.table td,
+.table th {
+  border: 1px solid #dddddd;
+  padding: 8px;
+  text-align: left;
+}
+
+/* Estilo para el paginador */
+#paginador {
+  display: flex;
+  justify-content: center;
+}
+
+#paginador a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+}
+
+#paginador a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+#paginador a:hover:not(.active) {
+  background-color: #ddd;
+}
+
+
+/*los siguientes estilos son de la página Registrar_Personal.php*/
+
+.modal-content {
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.3);
+  background-color: #faf9f9;
+
+}
+
+.modal-header {
+  background-color: rgb(0, 139, 139);
+  color: white;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  text-align: center;
+}
+
+.modal-title{
+  background-color: #00838f;
+  color: white;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  text-align: center;
+}
+
+.title {
+  border-radius: 10px;
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
+  background-color: #7fb3d5;
+  color: aliceblue;
+
+}
+
+.body-container {
+  padding: 20px;
+  font-size: 14px;
+}
+
+
+.modal-heade {
+  background-color: #e99b28;
+  color: white;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  text-align: center;
+}
+
+
+/* PÁGINA EDICIÓN */
+
+.edicion-personal {
+  background-color: rgb(139, 0, 76);
+  color: white;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  text-align: center;
+}
+
+.titulo-personal {
+  border-radius: 10px;
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
+  background-color: #4db6ac;
+  color: aliceblue;
+
+}
+
+
+/* PÁGINA VER */
+
+
+.enfermero-container {
+  border: 2px solid #3d800d;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.3);
+  background-color: #f3f3f3;
+}
+
+.foto-enfermero img {
+  width: 200px;
+  height: 200px;
+  /*border-radius: 50%;*/
+}
+
+.datos-container {
+  border: 2px solid #278960;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
+  background-color: #fefeff;
+}
+
+.navbar-toggler {
+  margin-right: 15px;
+}
+
+/* graficas */
+#chartdiv, #chartdiv1, #chartdiv2 {
+  width: 100%;
+  height: 500px;
+}
+
+/* pantalla de carga */
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: rgba(151, 150, 150, 0.97);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+}
+
+.loading svg polyline {
+  fill: none;
+  stroke-width: 6;
+  /* Aumentar el grosor de la línea */
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.loading svg polyline#back {
+  fill: none;
+  stroke: #ff4d5033;
+}
+
+.loading svg polyline#front {
+  fill: none;
+  stroke: #fb3437;
+  stroke-dasharray: 96, 288;
+  /* Ajustar la longitud del dasharray y el dashoffset */
+  stroke-dashoffset: 384;
+  animation: dash_682 1.4s linear infinite;
+}
+
+@keyframes dash_682 {
+  72.5% {
+    opacity: 0;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+
+.tabla-datos {
+  width: 100%;
+  border-collapse: collapse; /* Colapsar los bordes de la tabla */
+  margin-top: 20px; /* Margen superior de 20px */
+  margin-bottom: 20px; /* Margen inferior de 20px */
+}

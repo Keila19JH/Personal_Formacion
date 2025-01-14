@@ -1,0 +1,16 @@
+
+.cerrar-sesion {
+    background-color: rgba(255, 255, 255, 0.252); /* Fondo blanco opaco */
+    color: #ffffff; /* Texto blanco */
+    font-weight: bold; /* Negritas */
+    padding: 5px 15px; /* Espaciado interno */
+    border-radius: 50px; /* Bordes redondeados para óvalo */
+    text-align: center; /* Centra el texto */
+    display: inline-block; /* Mantiene el ancho en contenido */
+    transition: background-color 0.3s ease; /* Transición suave */
+}
+
+.cerrar-sesion:hover {
+    background-color: rgba(255, 255, 255, 0.518); /* Color más opaco al pasar el mouse */
+    color: #000; /* Texto negro al pasar el mouse */
+}

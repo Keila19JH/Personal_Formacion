@@ -1,0 +1,250 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+
+}
+
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    background-image: url(../img/aguil.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    justify-content: space-between;
+    color: rgb(16, 49, 43);
+    width: 100%; /* Asegura que el encabezado ocupe todo el ancho */
+    align-items: center;
+    z-index: 99;
+}
+
+
+header a {
+    position: relative;
+    font-size: 1.1em;
+    color: #0a0a0a;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left:15px ; 
+}
+
+header a::after{
+    content:'';
+    position: absolute;
+    left: 0;
+    bottom: -6px ;
+    width: 100%;
+    height: 3px;
+    background: #0c0c0c;
+    border-radius: 5px ;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform .5s;
+}
+
+header a:hover::after{
+    transform-origin: left;
+    transform: scaleX(1);
+
+}
+
+/* recuadro Bienvenido */
+.login-container1 {
+    display: flex;
+    border-radius: 50px;
+    box-shadow: 0 5px 7px rgba(0, 0, 0, 0.742);
+    height: 500px;
+    width: 550PX;
+    max-width: 900px;
+    transition: all 1s ease;
+    margin: 10px;
+    border: transparent;
+
+}
+
+.information{
+width: 60%;
+display: flex;
+align-items: center;
+text-align: center;
+background-color: #691C32;
+border-top-left-radius: 50px;
+border-bottom-left-radius: 50px;
+
+}
+
+.info-childs{
+width: 100%;
+padding: 0 30px;
+
+}
+
+.information h2{
+    font-size: 2.5rem;
+    color: #ffffff;
+}
+
+.information p {
+    margin: 15px 0;
+    color:#ededed;
+}
+ /* Contenedor de iniciar sesion */
+.login-container{
+display: flex;
+align-items: center;
+justify-content: center;
+width: 90%;
+text-align: center;
+border: transparent;
+}
+
+
+h5 {
+    font-size: 2em;
+    color: #121212;
+    font-family:fantasy;
+    text-align: center;
+}
+
+.input-container {
+    margin-bottom: 20px;
+    text-align: left;
+}
+/* boton */
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* usuario/contraseña */
+label {
+    display: flex;
+    align-items: center;
+    color: #1b1d1a;
+    margin-bottom: 15px;
+    border-radius: 30px;
+    padding:0 10px ;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 1);
+}
+
+input {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgba(244, 244, 244, 0.6);
+    outline: none;
+    border-radius: 50px;
+    color:#151414;
+    border-bottom: 1px solid #efefef;
+}
+
+input::after{
+    content: '';
+    position:absolute ;
+    left: 0;
+    bottom: -1px;
+    width: 100%;
+    height: 100;
+    border-bottom: 3px solid #eaeaea;
+    transform: translateX(-100%);
+    transition: all 0.3s ease;
+
+}
+
+button {
+    margin-top: 15px;
+    padding: 10px 10PX;
+    border: none;
+    border-radius: 20px;
+    background-color: #f8f8f8;
+    color: #000000;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: rgba(233, 180, 162, 0.7);
+    color:#9F2241
+}
+
+footer {
+    background-color: rgb(16,49,43,0.8);
+    color: rgba(152, 152, 153, 0.5);
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.fa-solid {
+    color:#000000;
+    font-size: 25px;
+}
+
+/* RESPONSIVE FORM */
+
+@media screen and  (max-width:750px){
+    html{
+        font-size: 12px;
+    }
+    
+}
+
+/* Pantalla de carga */
+
+.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: rgba(151, 150, 150, 0.97);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+}
+
+.loading svg polyline {
+    fill: none;
+    stroke-width: 6; /* Aumentar el grosor de la línea */
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.loading svg polyline#back {
+    fill: none;
+    stroke: #ff4d5033;
+}
+
+.loading svg polyline#front {
+    fill: none;
+    stroke: #fb3437;
+    stroke-dasharray: 96, 288; /* Ajustar la longitud del dasharray y el dashoffset */
+    stroke-dashoffset: 384;
+    animation: dash_682 1.4s linear infinite;
+}
+
+@keyframes dash_682 {
+    72.5% {
+        opacity: 0;
+    }
+
+    to {
+        stroke-dashoffset: 0;
+    }
+}
