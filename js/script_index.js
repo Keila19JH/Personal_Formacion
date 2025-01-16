@@ -30,15 +30,16 @@ $(document).ready(function () {
                             <td>${enfermero.nombre || ''}</td>    
                             <td>${enfermero.codigo || ''}</td>
                             <td><a href="ver_personal.php?id=${enfermero.id_enfermero || ''}">Ver</a></td>
-                            ${userType === 'admin' ? `<td><a href="editar.php?id=${enfermero.id_enfermero || ''}">Editar</a></td>` : ''}
-                            
+                            ${userType === 'admin' ? `
+                                <td><a href="editar.php?id=${enfermero.id_enfermero || ''}">Editar</a></td>
+                                <td><button class="btn btn-danger btn-sm eliminar-registro" data-id="${enfermero.id_enfermero}">Eliminar</button></td>
+                            ` : ''}
                         </tr>
                     `;
                 });
-
                 $("#tablaEnfermeros").html(html);
             }
-
+        
             // Función para mostrar el paginador
             function mostrarPaginador(totalRegistros, paginaActual) {
                 const numeroPaginas = Math.ceil(totalRegistros / registrosPorPagina);

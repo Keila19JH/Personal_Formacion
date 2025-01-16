@@ -30,6 +30,12 @@ body {
   background-color: #c2d5da;
 }
 
+.eliminar-registro {
+  display: inline-block;
+  visibility: visible;
+}
+
+
 /* Estilo para celdas */
 .table td,
 .table th {

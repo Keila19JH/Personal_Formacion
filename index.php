@@ -58,6 +58,7 @@ $username = $_SESSION['valid_user'];
         <?php endif; ?>
 
         <input type="text" id="buscador" class="form-control mb-3" placeholder="Buscar...">
+
             <div class="table-responsive">
                 <table class="table table-bordered table-hover">
                     <thead class="titulo-tabla">
@@ -71,6 +72,9 @@ $username = $_SESSION['valid_user'];
                             <th> Ver </th>
                             <?php if( $username == 'admin'): ?>
                                 <th> Editar </th>
+                            <?php endif; ?>
+                            <?php if( $username == 'admin'): ?>
+                                <th> Eliminar </th>
                             <?php endif; ?>
                         </tr>
                     </thead>
@@ -101,12 +105,22 @@ $username = $_SESSION['valid_user'];
             </ul>
         </nav>
     </div>
+    
 
-  <script> window.userType = <?php echo json_encode( isset( $username ) ? $username : '' ); ?>; </script>
-  <script src="js/script_index.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script type="module">
+        import { handleDelete } from './js/delete.js';
+        // Inicializar la funcionalidad de eliminación
+        $(document).ready(() => {
+            handleDelete();
+        });
+    </script>
+    <script> window.userType = <?php echo json_encode( isset( $username ) ? $username : '' ); ?>; </script>
+    <script src="js/script_index.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
 </html>
