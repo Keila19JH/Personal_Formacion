@@ -2,7 +2,7 @@
 
     class Database {
 
-        var $numberRows;
+        var $numberRows;  //Almacena el número de filas devueltas en una consulta.
         var $last_id;
 
         private $host;
@@ -10,15 +10,16 @@
         private $username;
         private $password;
 
+        //Recibe parámetros necesarios para conectarse a la BD 
         public function __construct($host, $dbName, $username, $password){
-
+            // Y los asigna a las propiedades de la clase Database
             $this->host = $host;
             $this->dbName = $dbName;
             $this->username = $username;
             $this->password = $password;
             
         }
-
+        //Establece la conexión con la BD
         function getConnections(){
 
             $connection = mysqli_connect($this->host,  $this->username, $this->password, $this->dbName);
@@ -31,7 +32,7 @@
             return $connection;
 
         }
-
+        //Cierra la conexión con la BD
         function closeConnection($param){
             mysqli_close($param);
         }
@@ -40,7 +41,7 @@
         function getRows($params){
 
             $all = array();
-            $this->numberRows;
+            $this->numberRows; //Asigna el número de filas encontradas
             $onConnection = $this->getConnections();
 
             if( $resultado = mysqli_query($onConnection, $params) ){
@@ -60,7 +61,8 @@
 
         //Query to search an simple data
         function getSimple($params){
-
+            
+            //Devuelve un único valor al ejecutar una consulta SELECT COUNT(*)
             $onConnection = $this->getConnections();
             $rows = mysqli_query($onConnection, $params);
             $records = $rows->fetch_array();
@@ -121,11 +123,32 @@
             }
         }
 
+        function deleteData( $table, $whereColumn, $whereValue){
+            
+            $whereValue = $this-> escapeString( $whereValue );
+            $query = "DELETE FROM $table WHERE $whereColumn = '$whereValue'";
+            $onConnection = $this->getConnections();
+            $result = mysqli_query( $onConnection, $query );
+
+            if( $result ){
+                
+                return mysqli_affected_rows( $onConnection );
+
+            }else{
+                return "Error al eliminar: ". mysqli_error( $onConnection );
+            }
+
+            $this -> closeConnection( $onConnection );
+
+        }
+
+    
         // Función para escapar cadenas y evitar inyección SQL
         function escapeString($value) {
             $onConnection = $this->getConnections();
             $escaped_value = mysqli_real_escape_string($onConnection, $value);
             $this->closeConnection($onConnection);
+            //Abre y cierra una conexión temporalmente para realizar el escape.
             return $escaped_value;
         }
 
@@ -139,8 +162,6 @@
             $this->closeConnection($onConnection);
         }
 
-
     }
-
 
 ?>

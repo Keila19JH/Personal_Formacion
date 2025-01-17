@@ -12,7 +12,7 @@ export const handleDelete = () => {
 
         console.log("ID enviado al servidor:", id);
         if (!id) {
-            setAlerts.errorAlert("El ID es inválido o no se encontró.");
+            setAlerts.errorAlert("ID inválido");
             return;
         }
 
@@ -30,12 +30,9 @@ export const handleDelete = () => {
 
                 console.log("Enviando solicitud al servidor con el ID:", id);
                 
-
-
                 // Enviar solicitud al servidor para eliminar el registro
 
-                
-                const response = await httpClients.post(deleteUrl, { id });
+                const response = await httpClients.post_1(deleteUrl, { id });
 
                 console.log("Datos enviados al servidor:", { id });  // Verifica que el ID esté presente
 
@@ -57,22 +54,25 @@ export const handleDelete = () => {
                     } else {
                         console.warn("No se encontró la fila en el DOM.");
                     }
+
                 } else if (response && response.status === "error") {
                     setAlerts.errorAlert(
                         "No se pudo eliminar el registro: " + response.message
                     );
+
                 } else {
                     setAlerts.errorAlert(
                         "Respuesta inesperada del servidor. Verifica el log."
                     );
                 }
+
             } catch (error) {
                 // Ocultar el overlay de carga en caso de error
                 hideLoadingOverlay();
 
                 console.error("Error en la solicitud:", error);
                 setAlerts.errorAlert(
-                    "Hubo un error al conectar con el servidor para eliminar el registro."
+                    "Hubo un error al conectar con el servidor para borrar el registro."
                 );
             }
         }

@@ -144,9 +144,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
         $Result_datos_personal = $connectionDB->insertData($Tables[5], $Data_personal);
 
-
-
-    
         echo 'success';
     }
 

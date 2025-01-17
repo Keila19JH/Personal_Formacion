@@ -1,5 +1,4 @@
 
-
 <?php
 
 require(__DIR__ . '/../models/database.model.php');
@@ -7,58 +6,68 @@ include(__DIR__ . '/../dbconfig.php');
 
 $connectionDB = new Database(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Verifica si el ID fue enviado
-    if (!isset($_POST['id'])) {
-        echo json_encode(['status' => 'error', 'message' => 'ID no enviado']);
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    $deleteId = isset($_POST['id_enfermero']) ? $_POST['id_enfermero'] : null;
+
+    // Validar que el ID no esté vacío
+    if (empty($deleteId)) {
+        echo json_encode([
+            "status" => "error",
+            "message" => "El ID es obligatorio para eliminar registros."
+        ]);
         exit;
     }
 
-    // Obtén el ID de la solicitud
-    $id = intval($_POST['id']);
+    // Arrays de tablas e IDs asociados
+    $tables_db = array(
+        $table_informacion_academica = 'informacion_academica',
+        $table_dias_laborales = 'dias_laborales',
+        $table_contrato = 'contrato',
+        $table_capacitacion = 'capacitacion',
+        $table_cursos_obligatorios = 'cursos_obligatorios',
+        $table_datos_personal = 'datos_personal'
+    );
 
-    // Depuración: Log del valor recibido
-    file_put_contents('debug.log', "ID recibido: $id\n", FILE_APPEND);  // Registra el valor en debug.log
+    $deleteColumns = array(
+        $deleteColum_ia = 'id',
+        $deleteColum_dl = 'id_dias_laborables',
+        $deleteColum_contrato = 'id_contrato',
+        $deleteColum_capacitacion = 'id_capacitacion',
+        $deleteColum_cursos_obligatorios = 'id_cursos_obligatorios',
+        $deleteColum = 'id_enfermero'
+    );
 
-    if ($id <= 0) {
-        echo json_encode(['status' => 'error', 'message' => 'ID inválido recibido']);
-        exit;
-    }
+    // Variables para gestionar el resultado
+    $errors = [];
+    $successCount = 0;
 
-    try {
-        // Inicia la transacción
-        $connectionDB->begin_transaction();
+    // Iterar sobre las tablas y sus columnas correspondientes
+    foreach ($tables_db as $key => $table) {
+        $column = $deleteColumns[$key];
+        $result = $connectionDB->deleteData($table, $column, $deleteId);
 
-        // Prepara la consulta
-        $stmt = $connectionDB->prepare("DELETE FROM datos_personal WHERE id_enfermero = ?");
-        if (!$stmt) {
-            echo json_encode(['status' => 'error', 'message' => 'Error al preparar la consulta: ' . $connectionDB->error]);
-            $connectionDB->rollback();
-            exit;
-        }
-
-        $stmt->bind_param("i", $id);
-        $stmt->execute();
-
-        // Verifica si se eliminó el registro
-        if ($stmt->affected_rows > 0) {
-            // Confirma la transacción
-            $connectionDB->commit();
-            echo json_encode(['status' => 'success', 'message' => 'Registro eliminado exitosamente']);
+        if (is_numeric($result) && $result > 0) {
+            $successCount++;
         } else {
-            // Sin registros afectados
-            $connectionDB->rollback();
-            echo json_encode(['status' => 'error', 'message' => 'No se encontró un registro con ese ID']);
+            $errors[] = "Error al eliminar en la tabla $table: $result";
         }
-
-        $stmt->close();
-    } catch (Exception $e) {
-        // En caso de error, deshacer la transacción
-        $connectionDB->rollback();
-        echo json_encode(['status' => 'error', 'message' => 'Error al eliminar el registro: ' . $e->getMessage()]);
     }
-} else {
-    echo json_encode(['status' => 'error', 'message' => 'Método no permitido']);
-}
-?>
 
+    // Responder según los resultados
+    if ($successCount > 0 && empty($errors)) {
+        echo json_encode([
+            "status" => "success",
+            "message" => "Se eliminaron correctamente los registros relacionados."
+        ]);
+    } else {
+        echo json_encode([
+            "status" => "error",
+            "message" => "Ocurrieron errores durante la eliminación.",
+            "details" => $errors
+        ]);
+    }
+}
+
+?>
